@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.spring.mapper.ProjectMapper">
+	
+	<update id="deleteUserImg" parameterType="userDto">
+		UPDATE user_table
+			SET profile_img = null
+			WHERE user_id = #{user_id};
+	</update>
+	
+	<update id="insertUserImg" parameterType="userDto">
+		UPDATE user_table
+			SET profile_img = #{profile_img}
+			WHERE user_id = #{user_id};
+	</update>
+	
+	<delete id="deleteRegAcc" parameterType="reserveDto">
+		DELETE FROM accommodation_list WHERE user_id = #{user_id} and acc_id=#{acc_id};
+	</delete>
+	
+	
+	<select id="selectRegisteredAccommodation" resultType="reserveDto">
+		SELECT * FROM accommodation_list WHERE user_id = #{user_id}
+	</select>
+	
+	<delete id="deleteReservation" parameterType="reserveDto">
+		DELETE FROM reservation WHERE customer_id = #{customer_id} and acc_id=#{acc_id};
+	</delete>
+	
+	<insert id="insertNewAccommodation">
+		INSERT INTO accommodation_list (user_id, name, category, price, location, roomCnt, toilCnt, image_name)
+			VALUES(#{user_id}, #{name}, #{category}, #{price}, #{location}, #{roomCnt}, #{toilCnt},#{image_name})
+	</insert>
+	
+	<select id="selectReservedAccommodation" parameterType="_int" resultType="reserveDto">
+		SELECT * 
+			FROM reservation NATURAL JOIN accommodation_list
+			WHERE customer_id = #{user_id}
+	</select>
+	
+	<insert id="insertReservationDate" parameterType="reserveDto">
+		INSERT INTO reservation (customer_id, acc_id, check_in, check_out)
+			VALUES(#{user_id},#{acc_id},#{check_in},#{check_out})
+	</insert>
+	
+	<select id="selectReservationByAccId" resultType="reserveDto">
+		SELECT *
+			FROM reservation NATURAL JOIN accommodation_list
+			WHERE acc_id = #{acc_id}
+	</select>
+	
+	<delete id="deleteUser" parameterType="userDto">
+		DELETE FROM user_table
+			WHERE user_id = #{user_id}
+	</delete>
+	
+	<select id="selectAccommodationByAccId" parameterType="_int" resultType="accDto">
+		SELECT *
+			FROM accommodation_list
+			WHERE acc_id = #{acc_id}
+	</select>
+	
+	<select id="selectAccommodationByKeyword" parameterType="string" resultType="accDto">
+		SELECT *
+			FROM accommodation_list
+			WHERE location LIKE CONCAT('%', #{keyword}, '%') or name LIKE CONCAT('%', #{keyword}, '%') or category LIKE CONCAT('%', #{keyword}, '%')
+	</select>
+	
+	<select id="selectAllAccommodation" resultType="accDto">
+		SELECT *
+			FROM accommodation_list
+	</select>
+	
+	<update id="updateUserInfo" parameterType="userDto">
+		UPDATE user_table
+			SET age = #{age}
+				,phone = #{phone}
+       			,address = #{address}
+       			,email = #{email}
+       			,profile_img = #{profile_img}
+			WHERE user_id = #{user_id};
+	</update>
+	
+	
+	<select id="selectUsernameAndPassword" parameterType="userDto" resultType="userDto">
+		SELECT *
+			FROM user_table
+    			WHERE username = #{username}
+				AND password = sha2(#{password},256);
+	</select>
+	
+	<select id="selectDuplUsername" parameterType="string" resultType="_int">
+		SELECT count(*) as login
+			FROM user_table
+			WHERE username = #{username}
+	</select>
+	
+	<insert id="insertUser" parameterType="userDto">
+		INSERT INTO user_table (username, password, age, phone, address, email)
+				VALUES(#{username},sha2(#{password},256),#{age},#{phone},#{address},#{email})
+	</insert>
+	
+</mapper>

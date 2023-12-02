@@ -1,0 +1,31 @@
+@charset "UTF-8";
+	.pagination {
+	    list-style: none;
+	    padding: 0;
+	    text-align: center;
+	}
+	
+	.pagination li {
+	    display: inline;
+	    margin: 0 5px;
+	}
+	
+	.pagination a {
+	    text-decoration: none;
+	    padding: 5px 10px; 
+	    border: 1px solid #ccc; 
+	    border-radius: 5px;
+	}
+	
+	.pagination a.on {
+	    background-color: #007BFF; /* 현재 페이지 버튼 스타일 설정 */
+	    color: #fff;
+	    border-color: #007BFF;
+	}
+	
+	/* 페이지 버튼에 마우스를 올렸을 때 스타일 설정 (선택 사항) */
+	.pagination a:hover {
+	    background-color: #ccc;
+	    color: #000;
+	    border-color: #ccc;
+	}

@@ -1,0 +1,38 @@
+@charset "UTF-8";
+
+.loginForm{
+	width: 300px;
+	margin: 60px auto;
+	margin-top: 60px;
+	padding: 20px;
+	background-color: white;
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+	border-radius: 5px;
+	text-align: center;
+}
+
+.loginForm p,
+.reservationForm p {
+	margin: 10px 0;
+}
+
+.loginForm input,
+.reservationForm input {
+	width: 90%;
+	padding: 10px;
+	margin: 5px 0;
+	border: 1px solid #ccc;
+	border-radius: 5px;
+}
+
+.loginForm button,
+.reservationForm button {
+	width: 100%;
+	padding: 10px;
+	margin: 10px 0;
+	background-color: var(--blue);
+	color: white;
+	border: none;
+	border-radius: 5px;
+	cursor: pointer;
+}

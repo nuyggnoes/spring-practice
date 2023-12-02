@@ -1,0 +1,22 @@
+@charset "UTF-8";
+
+.login__nav {
+	position: fixed;
+	top: 0;
+	width: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: space-around;
+	padding: 5px 20px;
+	box-sizing: border-box;
+	background-color: var(--blue);
+	height: 60px;
+}
+
+.login__nav__text {
+	text-align: center;
+	color: white;
+	font-size: 20px;
+	font-weight: bolder;
+	padding: 5px 10px;
+}
